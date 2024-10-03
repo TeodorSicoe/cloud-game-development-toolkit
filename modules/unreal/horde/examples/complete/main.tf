@@ -1,5 +1,13 @@
 data "aws_availability_zones" "available" {}
 
+terraform {
+  backend "s3" {
+    bucket         = "horde-tfstate-s3"
+    key            = ".terraform/terraform.tfstate"
+    region         = "eu-central-1"
+  }
+}
+
 locals {
   vpc_cidr_block       = "10.0.0.0/16"
   public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
