@@ -26,23 +26,6 @@ module "unreal_engine_horde" {
   github_credentials_secret_arn     = var.github_credentials_secret_arn
   tags                              = local.tags
 
-  agents = {
-    ubuntu-x86 = {
-      ami           = data.aws_ami.ubuntu_noble_amd.id
-      instance_type = "c7a.large"
-      min_size      = 2
-      max_size      = 5
-      block_device_mappings = [
-        {
-          device_name = "/dev/sda1"
-          ebs = {
-            volume_size = 64
-          }
-        }
-      ]
-    }
-  }
-
   fully_qualified_domain_name = "horde.${var.root_domain_name}"
 
   depends_on = [aws_acm_certificate_validation.unreal_engine_horde]
