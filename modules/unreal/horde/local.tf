@@ -8,7 +8,7 @@ resource "random_string" "unreal_horde" {
 data "aws_region" "current" {}
 
 locals {
-  image       = "ghcr.io/epicgames/horde-server:latest-bundled"
+  image       = var.unreal_horde_image
   name_prefix = "${var.project_prefix}-${var.name}"
   tags = merge(var.tags, {
     "environment" = var.environment
@@ -63,6 +63,38 @@ locals {
     {
       name  = "ASPNETCORE_ENVIRONMENT"
       value = var.environment
+    },
+    {
+      name = "Horde__ConfigPath"
+      value = "//horde/configs/globals.json"
+    },
+    {
+      name = "Horde__Perforce__0__id"
+      value = "Default"
+    },
+    {
+      name = "Horde__Perforce__0__serverAndPort"
+      value = "ssl:core.helix.studio.outofthebox-plugins.com:1666"
+    },
+    {
+      name = "Horde__Perforce__0__userName"
+      value = "perforce"
+    },
+    {
+      name = "Horde__Perforce__0__password"
+      value = "CQIP4SJCesBS2eNuMeWrcR6S17DIVM0v"
+    },
+    {
+      name = "P4PORT"
+      value = "ssl:core.helix.studio.outofthebox-plugins.com:1666"
+    },
+    {
+      name = "P4USER"
+      value = "perforce"
+    },
+    {
+      name = "P4PASSWD"
+      value = "CQIP4SJCesBS2eNuMeWrcR6S17DIVM0v"
     }
   ] : config.value != null ? config : null]
 }

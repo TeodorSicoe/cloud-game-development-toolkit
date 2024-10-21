@@ -29,4 +29,12 @@ module "unreal_engine_horde" {
   fully_qualified_domain_name = "horde.${var.root_domain_name}"
 
   depends_on = [aws_acm_certificate_validation.unreal_engine_horde]
+
+  unreal_horde_image                = var.unreal_horde_image
+  auth_method                       = var.auth_method
+  oidc_client_id                    = var.oidc_client_id
+  oidc_authority                    = var.oidc_authority
+  oidc_client_secret                = var.oidc_client_secret
+  oidc_audience                     = var.oidc_audience
+  oidc_signin_redirect              = var.oidc_signin_redirect
 }

@@ -28,9 +28,9 @@ variable "environment" {
 variable "tags" {
   type = map(any)
   default = {
-    "IAC_MANAGEMENT" = "CGD-Toolkit"
-    "IAC_MODULE"     = "unreal-horde"
-    "IAC_PROVIDER"   = "Terraform"
+    "iac-management" = "CGD-Toolkit"
+    "iac-module"     = "unreal-horde"
+    "iac-provider"   = "Terraform"
   }
   description = "Tags to apply to resources."
 }
@@ -98,7 +98,7 @@ variable "container_cpu" {
 variable "container_memory" {
   type        = number
   description = "The memory allotment for the Unreal Horde container."
-  default     = 4096
+  default     = 8192
   nullable    = false
 }
 
@@ -404,4 +404,13 @@ variable "enable_new_agents_by_default" {
   type        = bool
   description = "Set this flag to automatically enable new agents that enroll with the Horde Server."
   default     = false
+}
+
+
+######################
+# DOCKER CONFIGURATION
+######################
+variable "unreal_horde_image" {
+  type        = string
+  description = "The Docker image to use for the Unreal Horde server."
 }
